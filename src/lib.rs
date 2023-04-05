@@ -270,6 +270,9 @@ cfg_if! {
     } else if #[cfg(all(feature = "rdrand",
                         any(target_arch = "x86_64", target_arch = "x86")))] {
         #[path = "rdrand.rs"] mod imp;
+    } else if #[cfg(all(any(target_arch = "wasm32", target_arch = "wasm64"),
+                        target_os = "unknown"))] {
+        #[path = "fake.rs"] mod imp;
     } else if #[cfg(all(feature = "js",
                         any(target_arch = "wasm32", target_arch = "wasm64"),
                         target_os = "unknown"))] {
